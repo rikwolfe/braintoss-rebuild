@@ -1,0 +1,46 @@
+{
+  "name": "braintoss-rebuild",
+  "version": "0.1.0",
+  "description": "A complete rebuild of the Braintoss application with modern architecture and improved user experience.",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src",
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "echo \"Tests not yet configured\" && exit 0"
+  },
+  "keywords": [
+    "braintoss",
+    "productivity",
+    "note-taking",
+    "mobile-app"
+  ],
+  "author": "Richard Wolfe",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@types/node": "^24.5.2",
+    "@types/react": "^19.1.15",
+    "@types/react-dom": "^19.1.9",
+    "next": "^15.5.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "autoprefixer": "^10.4.21",
+    "eslint-config-next": "^15.5.4",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13"
+  }
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="19529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f1c-ee-AMJ">
+    <device id="watch38"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="19514"/>
+    </dependencies>
+    <scenes>
+        <!--Hosting Controller-->
+        <scene sceneID="7Jl-g7-XKF">
+            <objects>
+                <hostingController id="f1c-ee-AMJ" customClass="HostingController" customModule="BraintossWatchApp" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="187" y="141"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="hdI-Ph-d4z">
+            <objects>
+                <notificationController id="T3X-Xp-xFe">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="ask-Ww-AH2"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="IbI-JE-EMC"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="ask-Ww-AH2" id="7ox-ll-nD2"/>
+                        <segue destination="hj5-TU-Ka3" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="07Q-eM-kd5"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="187" y="462"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="cSy-f2-GjS">
+            <objects>
+                <controller id="hj5-TU-Ka3" customClass="NotificationController" customModule="BraintossWatchApp" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="488" y="462"/>
+        </scene>
+    </scenes>
+</document>

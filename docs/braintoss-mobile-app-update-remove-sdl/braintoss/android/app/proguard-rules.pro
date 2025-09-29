@@ -1,0 +1,12 @@
+-keep class io.flutter.app.** { *; }
+-keep class io.flutter.plugin.**  { *; }
+-keep class io.flutter.util.**  { *; }
+-keep class io.flutter.view.**  { *; }
+-keep class io.flutter.**  { *; }
+-keep class io.flutter.plugins.**  { *; }
+-dontwarn io.flutter.embedding.**
+-keep class com.smartdevicelink.** { *; }
+-keep class com.livio.** { *; }
+# Video streaming apps must add the following line
+-keep class ** extends com.smartdevicelink.streaming.video.SdlRemoteDisplay { *; }
+-dontwarn com.google.android.play.core.splitcompat.SplitCompatApplication

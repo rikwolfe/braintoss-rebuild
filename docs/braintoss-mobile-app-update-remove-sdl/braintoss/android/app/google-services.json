@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "536002207587",
+    "project_id": "braintoss-dev",
+    "storage_bucket": "braintoss-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536002207587:android:8f85af4b2135819629bd56",
+        "android_client_info": {
+          "package_name": "com.braintoss.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536002207587-unomrm0qf1h5avuh4i5bbm3gor0728pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjGCYndGMjfjDTH8TyeSmmoknJJHuTr2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536002207587-unomrm0qf1h5avuh4i5bbm3gor0728pm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "536002207587-ifb9ccfpkd1uddcgcvokc88csmddd4s7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.braintoss.braintoss"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
