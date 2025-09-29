@@ -11,15 +11,21 @@ import {
   XMarkIcon,
   PlusIcon
 } from '@heroicons/react/24/outline';
+import VoiceRecordingScreen from '../src/components/VoiceRecordingScreen';
 
 // This will be moved to a proper state management solution later
 interface StagedAttachment {
-  type: 'image' | 'pdf';
+  type: 'image' | 'pdf' | 'audio';
   filename: string;
   preview?: string; // for images
+  blob?: Blob; // for audio
+  duration?: number; // for audio
 }
 
+type ScreenState = 'main' | 'voice' | 'camera' | 'photo-preview';
+
 export default function MainTextScreen() {
+  const [currentScreen, setCurrentScreen] = useState<ScreenState>('main');
   const [textInput, setTextInput] = useState('');
   const [stagedAttachments, setStagedAttachments] = useState<StagedAttachment[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -54,8 +60,50 @@ export default function MainTextScreen() {
 
   // Handle voice recording
   const handleVoiceRecord = () => {
-    // TODO: Navigate to Voice Recording Screen
-    console.log('Starting voice recording...');
+    setCurrentScreen('voice');
+  };
+  
+  // Handle voice recording completion
+  const handleVoiceSend = (audioBlob: Blob, duration: number, existingText?: string) => {
+    // Add audio attachment
+    const audioAttachment: StagedAttachment = {
+      type: 'audio',
+      filename: `voice-${Date.now()}.wav`,
+      blob: audioBlob,
+      duration
+    };
+    
+    setStagedAttachments(prev => [...prev, audioAttachment]);
+    
+    // If we had existing text, restore it
+    if (existingText) {
+      setTextInput(existingText);
+    }
+    
+    // Return to main screen
+    setCurrentScreen('main');
+    
+    // TODO: Implement actual send logic
+    console.log('Voice toss ready:', { 
+      text: existingText || textInput, 
+      audio: audioBlob,
+      duration 
+    });
+  };
+  
+  // Handle voice recording cancel
+  const handleVoiceCancel = (preserveText?: boolean) => {
+    if (preserveText && textInput) {
+      // Keep the existing text
+    }
+    setCurrentScreen('main');
+    
+    // Re-focus text area
+    setTimeout(() => {
+      if (textareaRef.current) {
+        textareaRef.current.focus();
+      }
+    }, 100);
   };
 
   // Handle photo capture
@@ -68,6 +116,36 @@ export default function MainTextScreen() {
   const removeAttachment = (index: number) => {
     setStagedAttachments(prev => prev.filter((_, i) => i !== index));
   };
+  
+  // Render audio attachment
+  const renderAudioAttachment = (attachment: StagedAttachment, index: number) => {
+    return (
+      <div key={index} className="attachment-chip">
+        <MicrophoneIcon className="w-4 h-4 mr-2" />
+        <span className="text-xs">
+          Voice ({attachment.duration ? `${Math.floor(attachment.duration / 60)}:${(attachment.duration % 60).toString().padStart(2, '0')}` : 'recording'})
+        </span>
+        <button
+          onClick={() => removeAttachment(index)}
+          className="ml-2 w-4 h-4 text-gray-500 hover:text-red-500"
+        >
+          <XMarkIcon className="w-4 h-4" />
+        </button>
+      </div>
+    );
+  };
+
+  // Render voice recording screen
+  if (currentScreen === 'voice') {
+    return (
+      <VoiceRecordingScreen
+        initialText={textInput}
+        onSend={handleVoiceSend}
+        onCancel={handleVoiceCancel}
+        onBack={() => setCurrentScreen('main')}
+      />
+    );
+  }
 
   return (
     <div className="braintoss-screen">
@@ -115,6 +193,8 @@ export default function MainTextScreen() {
                           <XMarkIcon className="w-4 h-4" />
                         </button>
                       </div>
+                    ) : attachment.type === 'audio' ? (
+                      renderAudioAttachment(attachment, index)
                     ) : (
                       <div className="attachment-chip">
                         <DocumentIcon className="w-4 h-4 mr-2" />

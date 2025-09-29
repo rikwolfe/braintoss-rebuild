@@ -145,6 +145,117 @@
   .btn-icon {
     @apply p-3 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
+  
+  /* Voice Recording Screen Styles */
+  .voice-recording-screen {
+    @apply min-h-screen flex flex-col relative overflow-hidden;
+  }
+  
+  .voice-header {
+    @apply flex items-center justify-between p-4 mt-8;
+  }
+  
+  .header-back-btn {
+    @apply p-2 transition-transform hover:scale-110 focus:outline-none;
+  }
+  
+  .voice-content {
+    @apply flex-1 flex flex-col items-center justify-center px-6 py-8;
+  }
+  
+  .voice-timer {
+    @apply text-6xl font-light text-white mb-8 tabular-nums;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .waveform-container {
+    @apply w-full max-w-sm h-24 mb-8 flex items-center justify-center;
+  }
+  
+  .waveform {
+    @apply flex items-end justify-center gap-1 h-full w-full;
+  }
+  
+  .waveform-bar {
+    @apply w-1 bg-white rounded-full transition-all duration-100;
+    min-height: 2px;
+  }
+  
+  .voice-status {
+    @apply text-lg text-white/80 mb-8 text-center;
+  }
+  
+  .existing-text-preview {
+    @apply w-full max-w-sm p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 mb-6;
+  }
+  
+  .existing-text-content {
+    @apply text-white text-sm leading-relaxed;
+  }
+  
+  .voice-controls {
+    @apply flex items-center justify-center gap-6 p-6 pb-12;
+  }
+  
+  .voice-btn {
+    @apply flex flex-col items-center gap-2 px-6 py-4 rounded-2xl transition-all duration-200 focus:outline-none font-medium;
+    min-width: 120px;
+  }
+  
+  .voice-btn:hover {
+    @apply scale-105;
+  }
+  
+  .voice-btn:active {
+    @apply scale-95;
+  }
+  
+  .voice-btn-cancel {
+    @apply bg-white/20 text-white hover:bg-white/30 border border-white/30;
+  }
+  
+  .voice-btn-send {
+    @apply bg-white text-blue-600 hover:bg-white/90;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
+  }
+  
+  .voice-btn:disabled {
+    @apply opacity-50 cursor-not-allowed;
+    transform: scale(0.95);
+  }
+  
+  /* Modal Styles */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50;
+  }
+  
+  .modal-content {
+    @apply bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl;
+  }
+  
+  .modal-title {
+    @apply text-xl font-semibold text-gray-900 mb-2;
+  }
+  
+  .modal-text {
+    @apply text-gray-600 mb-6 leading-relaxed;
+  }
+  
+  .modal-buttons {
+    @apply flex gap-3;
+  }
+  
+  .modal-btn {
+    @apply flex-1 py-3 px-4 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .modal-btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-900 focus:ring-gray-500;
+  }
+  
+  .modal-btn-primary {
+    @apply bg-red-600 hover:bg-red-700 text-white focus:ring-red-500;
+  }
 }
     @apply text-red-600;
   }
