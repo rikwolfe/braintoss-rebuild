@@ -5,11 +5,11 @@ import {
   MicrophoneIcon, 
   CameraIcon, 
   PaperAirplaneIcon,
-  ClockIcon,
   ArchiveBoxIcon,
   Cog6ToothIcon,
   DocumentIcon,
-  XMarkIcon
+  XMarkIcon,
+  PlusIcon
 } from '@heroicons/react/24/outline';
 
 // This will be moved to a proper state management solution later
@@ -70,111 +70,115 @@ export default function MainTextScreen() {
   };
 
   return (
-    <div className="screen-container">
-      {/* Top Bar */}
-      <div className="top-bar">
-        <button className="btn-icon hover:bg-gray-100">
-          <ArchiveBoxIcon className="w-6 h-6 text-gray-700" />
-        </button>
-        
-        <h1 className="text-xl font-semibold text-gray-900">
-          Braintoss
-        </h1>
-        
-        <button className="btn-icon hover:bg-gray-100">
-          <Cog6ToothIcon className="w-6 h-6 text-gray-700" />
-        </button>
-      </div>
-
-      {/* Content Area */}
-      <div className="content-area">
-        {/* Main Text Input */}
-        <textarea
-          ref={textareaRef}
-          value={textInput}
-          onChange={(e) => setTextInput(e.target.value)}
-          placeholder="Type your thoughts…"
-          className="text-input-main"
-          rows={6}
-        />
-        
-        {/* Attachment Strip */}
-        {stagedAttachments.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {stagedAttachments.map((attachment, index) => (
-              <div key={index} className="relative">
-                {attachment.type === 'image' ? (
-                  <div className="relative">
-                    <img
-                      src={attachment.preview}
-                      alt={attachment.filename}
-                      className="attachment-thumbnail"
-                    />
-                    <button
-                      onClick={() => removeAttachment(index)}
-                      className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600"
-                    >
-                      <XMarkIcon className="w-4 h-4" />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="attachment-chip">
-                    <DocumentIcon className="w-4 h-4 mr-2" />
-                    <span className="truncate max-w-32">{attachment.filename}</span>
-                    <button
-                      onClick={() => removeAttachment(index)}
-                      className="ml-2 w-4 h-4 text-gray-500 hover:text-red-500"
-                    >
-                      <XMarkIcon className="w-4 h-4" />
-                    </button>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Bottom Action Row */}
-      <div className="bottom-actions">
-        <div className="action-row">
-          {/* Voice Button */}
-          <button 
-            onClick={handleVoiceRecord}
-            className="btn-voice"
-            title="Record voice note"
-          >
-            <MicrophoneIcon className="w-6 h-6" />
+    <div className="braintoss-screen">
+      {/* Gradient Background */}
+      <div className="braintoss-bg">
+        {/* Top Header Pill */}
+        <div className="header-pill">
+          <button className="header-btn">
+            <ArchiveBoxIcon className="w-6 h-6 text-yellow-400" />
           </button>
-
-          {/* Send Button (center, large) */}
-          <button 
-            onClick={() => handleSend(false)}
-            onContextMenu={(e) => {
-              e.preventDefault();
-              handleSend(true);
-            }}
-            className="btn-send"
-            disabled={!textInput.trim() && stagedAttachments.length === 0}
-          >
-            <PaperAirplaneIcon className="w-6 h-6 mr-2" />
-            Send
-          </button>
-
-          {/* Photo Button */}
-          <button 
-            onClick={handlePhotoCapture}
-            className="btn-photo"
-            title="Take or choose photo"
-          >
-            <CameraIcon className="w-6 h-6" />
+          <button className="header-btn">
+            <Cog6ToothIcon className="w-6 h-6 text-yellow-400" />
           </button>
         </div>
-        
-        {/* Helper text */}
-        <p className="text-center text-xs text-gray-500 mt-2">
-          Long-press Send to choose destination
-        </p>
+
+        {/* Main Content Area */}
+        <div className="main-content">
+          {/* Text Input Card */}
+          <div className="text-card">
+            <textarea
+              ref={textareaRef}
+              value={textInput}
+              onChange={(e) => setTextInput(e.target.value)}
+              placeholder="Type your thoughts…"
+              className="braintoss-textarea"
+              rows={12}
+            />
+            
+            {/* Attachment Strip */}
+            {stagedAttachments.length > 0 && (
+              <div className="attachment-strip">
+                {stagedAttachments.map((attachment, index) => (
+                  <div key={index} className="relative">
+                    {attachment.type === 'image' ? (
+                      <div className="relative">
+                        <img
+                          src={attachment.preview}
+                          alt={attachment.filename}
+                          className="attachment-thumbnail"
+                        />
+                        <button
+                          onClick={() => removeAttachment(index)}
+                          className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600"
+                        >
+                          <XMarkIcon className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="attachment-chip">
+                        <DocumentIcon className="w-4 h-4 mr-2" />
+                        <span className="truncate max-w-32">{attachment.filename}</span>
+                        <button
+                          onClick={() => removeAttachment(index)}
+                          className="ml-2 w-4 h-4 text-gray-500 hover:text-red-500"
+                        >
+                          <XMarkIcon className="w-4 h-4" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Floating Action Buttons */}
+          <div className="floating-actions">
+            {/* Voice Button (left) */}
+            <button 
+              onClick={handleVoiceRecord}
+              className="floating-btn floating-btn-voice"
+              title="Record voice note"
+            >
+              <div className="floating-btn-bg floating-btn-bg-yellow">
+                <MicrophoneIcon className="w-7 h-7 text-blue-700" />
+                <div className="floating-btn-plus">
+                  <PlusIcon className="w-4 h-4 text-white" />
+                </div>
+              </div>
+            </button>
+
+            {/* Send Button (center, large) */}
+            <button 
+              onClick={() => handleSend(false)}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                handleSend(true);
+              }}
+              className="floating-btn floating-btn-send"
+              disabled={!textInput.trim() && stagedAttachments.length === 0}
+            >
+              <div className="floating-btn-bg floating-btn-bg-blue">
+                <PaperAirplaneIcon className="w-8 h-8 text-yellow-400" />
+              </div>
+            </button>
+
+            {/* Photo Button (right) */}
+            <button 
+              onClick={handlePhotoCapture}
+              className="floating-btn floating-btn-photo"
+              title="Take or choose photo"
+            >
+              <div className="floating-btn-bg floating-btn-bg-yellow">
+                <CameraIcon className="w-7 h-7 text-blue-700" />
+                <div className="floating-btn-plus">
+                  <PlusIcon className="w-4 h-4 text-white" />
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
